@@ -21,7 +21,7 @@
 //!
 //! - The base address of the per-CPU data area on the CPU,
 //!   - which can be calculated by the base address of the whole per-CPU data area and the CPU ID,
-//!   - and then stored in a register, like `TPIDR_EL1`/`TPIDR_EL2` on AArch64, or `gs` on x86_64.
+//!   - and then stored in a register, like `TPIDR_EL0`/`TPIDR_EL2` on AArch64, or `gs` on x86_64.
 //! - The offset of the per-CPU static variable relative to the per-CPU data area base,
 //!   - which can be calculated by assembly notations, like `offset symbol` on x86_64, or `#:abs_g0_nc:symbol` on
 //!     AArch64, or `%hi(symbol)` and `%lo(symbol)` on RISC-V.

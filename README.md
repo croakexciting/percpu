@@ -31,7 +31,7 @@ to access the corresponding field.
 > area, while the `tp` register is used for thread-local storage.
 
 > Notes for AArch64:
-> When feature `arm-el2` is enabled, `TPIDR_EL2` is used. Otherwise, `TPIDR_EL1`
+> When feature `arm-el2` is enabled, `TPIDR_EL2` is used. Otherwise, `TPIDR_EL0`
 > is used.
 
 ## Examples
@@ -75,5 +75,5 @@ _percpu_end = _percpu_start + SIZEOF(.percpu);
   preemption when accessing per-CPU data. Otherwise, the data may be corrupted
   when it's being accessing and the current thread happens to be preempted.
 - `arm-el2`: For **ARM system** running at **EL2** use (e.g. hypervisors).
-  In this case, we use `TPIDR_EL2` instead of `TPIDR_EL1`
+  In this case, we use `TPIDR_EL2` instead of `TPIDR_EL0`
   to store the base address of per-CPU data area.
