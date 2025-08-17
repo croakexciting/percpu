@@ -57,9 +57,9 @@ pub fn gen_current_ptr(symbol: &Ident, ty: &Type) -> proc_macro2::TokenStream {
     } else {
         // For ARM architecture, we assume running in EL1 by default,
         // and use `TPIDR_EL0` to store the base address of the per-CPU data area.
-        "TPIDR_EL0"
+        "x28"
     };
-    let aarch64_asm = format!("mrs {{}}, {aarch64_tpidr}");
+    let aarch64_asm = format!("mov {{}}, {aarch64_tpidr}");
 
     macos_unimplemented(quote! {
         let base: usize;

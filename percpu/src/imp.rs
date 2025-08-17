@@ -103,7 +103,7 @@ pub fn read_percpu_reg() -> usize {
             } else if #[cfg(any(target_arch = "riscv32", target_arch = "riscv64"))] {
                 core::arch::asm!("mv {}, gp", out(reg) tp)
             } else if #[cfg(all(target_arch = "aarch64", not(feature = "arm-el2")))] {
-                core::arch::asm!("mrs {}, TPIDR_EL0", out(reg) tp)
+                core::arch::asm!("mov {}, x28", out(reg) tp)
             } else if #[cfg(all(target_arch = "aarch64", feature = "arm-el2"))] {
                 core::arch::asm!("mrs {}, TPIDR_EL2", out(reg) tp)
             } else if #[cfg(target_arch = "loongarch64")] {
@@ -145,7 +145,7 @@ pub unsafe fn write_percpu_reg(tp: usize) {
             } else if #[cfg(any(target_arch = "riscv32", target_arch = "riscv64"))] {
                 core::arch::asm!("mv gp, {}", in(reg) tp)
             } else if #[cfg(all(target_arch = "aarch64", not(feature = "arm-el2")))] {
-                core::arch::asm!("msr TPIDR_EL0, {}", in(reg) tp)
+                core::arch::asm!("mov x28, {}", in(reg) tp)
             } else if #[cfg(all(target_arch = "aarch64", feature = "arm-el2"))] {
                 core::arch::asm!("msr TPIDR_EL2, {}", in(reg) tp)
             } else if #[cfg(target_arch = "loongarch64")] {
